@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 048701352fcd141fb8d985ff4b7c43d4
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 40913dac6671f40508b0d604624b25e0
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer.unity
+    guid: e6462e7d2f07346779e60ea38020b0bc
+  - enabled: 1
+    path: Assets/Scenes/Player vs IA.unity
+    guid: 466dad3ce11aa034d81f3fa35fe77bfe
+  - enabled: 1
+    path: Assets/Scenes/IA vs IA.unity
+    guid: 3e73d1a702ff341e890595053c53411f
+  - enabled: 1
+    path: Assets/Scenes/Algo Genetique.unity
+    guid: 68af00a4f83c04c74a3b3c32f4d50505
+  - enabled: 1
+    path: Assets/Scenes/Replays.unity
+    guid: b4da82816427f4b1b81ae052eef010ee
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: 56579500090bf42b18304fe1405ebe5e
+  m_configObjects: {}

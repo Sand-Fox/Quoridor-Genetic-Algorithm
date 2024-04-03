@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -262343771, guid: eb4eaaabc8cc3594aa76719228fcd76f, type: 3}
+  m_Name: RIAutoBackend-732024692
+  m_EditorClassIdentifier: 
+  vertexPositions:
+  - vertexId: -13090
+    vertexPosition: {x: -0.27939692, y: 0.009525318}
+  - vertexId: -13096
+    vertexPosition: {x: 0.99950397, y: -0.49992594}
+  - vertexId: -13102
+    vertexPosition: {x: 0.9994141, y: 0.99991107}
+  - vertexId: -13108
+    vertexPosition: {x: 1.998791, y: -0.9999596}
+  - vertexId: -13114
+    vertexPosition: {x: 1.9994054, y: -0.00022910633}
+  - vertexId: -13120
+    vertexPosition: {x: 1.9993178, y: 0.9998608}
+  transform:
+    translation: {x: 0, y: 0}
+    scale: {x: 1, y: 1}
+    rotation: 0
+  widgetType: 0
