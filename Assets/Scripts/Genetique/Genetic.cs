@@ -11,10 +11,10 @@ public abstract class Genetic : MonoBehaviour
     private List<Vector4> _population = new();
 
     private int _nbIndividuals;
-    private static int _nbGenerations;
+    private int _nbGenerations;
 
-    private int indexIndividuals;
-    private int indexGenerations;
+    private int _indexIndividuals;
+    private int _indexGenerations;
 
     private void Awake()
     {
@@ -26,8 +26,16 @@ public abstract class Genetic : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
 
+    private void OnEnable()
+    {
         GameManager.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnGameStateChanged -= OnGameStateChanged;
     }
 
 
@@ -38,8 +46,8 @@ public abstract class Genetic : MonoBehaviour
     {
         _nbIndividuals = nbIndividuals;
         _nbGenerations = nbGenerations;
-        indexIndividuals = 0;
-        indexGenerations = 0;
+        _indexIndividuals = 0;
+        _indexGenerations = 0;
 
         for (int i = 0; i < _nbIndividuals; i++)
         {
@@ -83,7 +91,7 @@ public abstract class Genetic : MonoBehaviour
 
     private void OnEndMatch(bool stateIsWin)
     {
-        indexIndividuals += 2;
+        _indexIndividuals += 2;
 
         IANegaAlphaBeta IAWinner;
         IANegaAlphaBeta IALooser;
@@ -102,12 +110,12 @@ public abstract class Genetic : MonoBehaviour
         _winners.Add(IAWinner.weight);
         _loosers.Add(IALooser.weight);
 
-        if (indexIndividuals == _nbIndividuals)
+        if (_indexIndividuals == _nbIndividuals)
         {
-            indexGenerations++;
-            indexIndividuals = 0;
+            _indexGenerations++;
+            _indexIndividuals = 0;
 
-            if (indexGenerations == _nbGenerations)
+            if (_indexGenerations == _nbGenerations)
             {
                 string results = "";
                 foreach (Vector4 weight in _winners) results += weight + "\n";
