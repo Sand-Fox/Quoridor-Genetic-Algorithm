@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GeneticWithMutation : Genetic
 {
+    [SerializeField, Range(0, 1)] private float _mutateProbability = 0.1f;
+
     protected override List<Vector4> CreateNewGeneration()
     {
         List<Vector4> newGen = new();
@@ -11,20 +13,19 @@ public class GeneticWithMutation : Genetic
         while (_winners.Count > 0)
         {
             Vector4 father = _winners.GetRandom();
-            _winners.Remove(father);
-
             Vector4 mother = _winners.GetRandom();
-            _winners.Remove(mother);
 
-            newGen.Add(father);
-            newGen.Add(mother);
+            _winners.Remove(father);
+            _winners.Remove(mother);
 
             Vector4 child1 = Reproduce(father, mother);
             Vector4 child2 = Reproduce(father, mother);
 
-            if (Random.value < 0.01) child1 = Mutation(child1);
-            if (Random.value < 0.01) child2 = Mutation(child2);
+            if (Random.value < _mutateProbability) child1 = Mutate(child1);
+            if (Random.value < _mutateProbability) child2 = Mutate(child2);
 
+            newGen.Add(father);
+            newGen.Add(mother);
             newGen.Add(child1);
             newGen.Add(child2);
         }
@@ -34,7 +35,7 @@ public class GeneticWithMutation : Genetic
 
     private Vector4 Reproduce(Vector4 father, Vector4 mother)
     {
-        Vector4 son = new Vector4(
+        Vector4 son = new(
             (Random.value < 0.5) ? father.x : mother.x,
             (Random.value < 0.5) ? father.y : mother.y,
             (Random.value < 0.5) ? father.z : mother.z,
@@ -42,26 +43,11 @@ public class GeneticWithMutation : Genetic
         return son;
     }
 
-    private Vector4 Modify(Vector4 father, int geneIndex)
+    private Vector4 Mutate(Vector4 original)
     {
-        if (geneIndex == 0) return new Vector4(father.x * Random.Range(0.9f, 1.1f), father.y, father.z, father.w);
-        if (geneIndex == 1) return new Vector4(father.x, father.y * Random.Range(0.9f, 1.1f), father.z, father.w);
-        if (geneIndex == 2) return new Vector4(father.x, father.y, father.z * Random.Range(0.9f, 1.1f), father.w);
-        if (geneIndex == 3) return new Vector4(father.x, father.y, father.z, father.w * Random.Range(0.9f, 1.1f));
-        Debug.LogWarning("n is not in range of Vector4");
-        return default;
-    }
-
-    private Vector4 Mutation(Vector4 father)
-    {
-        Vector4 son = new Vector4();
-        int nbGenes = Random.Range(1, 5);
-
-        for (int i = 0; i < nbGenes; i++)
-        {
-            int geneIndex = Random.Range(0, 4);
-            son = Modify(father, geneIndex);
-        }
+        Vector4 son = original;
+        int geneIndex = Random.Range(0, 4);
+        son[geneIndex] = Random.value;
         return son;
     }
 }

@@ -61,9 +61,9 @@ public abstract class Genetic : MonoBehaviour
     private void Match()
     {
         Vector4 weight1 = _population.GetRandom();
-        _population.Remove(weight1);
-
         Vector4 weight2 = _population.GetRandom();
+
+        _population.Remove(weight1);
         _population.Remove(weight2);
 
         SceneSetUpManager.IAWeight1 = weight1;
@@ -124,6 +124,12 @@ public abstract class Genetic : MonoBehaviour
             }
 
             _population = CreateNewGeneration();
+
+            if (_population.Count != _nbIndividuals)
+            {
+                Debug.LogError("Attention : Toutes les generations doivent avoir le meme nombre d'individus.");
+            }
+
             Match();
             return;
         }
@@ -137,6 +143,7 @@ public abstract class Genetic : MonoBehaviour
 
     /// <summary>
     /// Populate the next generation before creating matchs.
+    /// Warning : The next generation must have the same number of individuals as the current generation.
     /// </summary>
     protected abstract List<Vector4> CreateNewGeneration();
 
