@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 113848952}
   - component: {fileID: 113848953}
   m_Layer: 0
-  m_Name: Population
+  m_Name: Genetic Algorithm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -304,11 +304,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 113848951}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6dc8166e032f084c8f8acccdaf77287, type: 3}
+  m_Script: {fileID: 11500000, guid: 12896b06f28ea474e949f007b9104fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TmpIndividuals: {fileID: 1677139786}
-  TmpGenerations: {fileID: 1817860567}
 --- !u!1001 &129787696
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -391,7 +389,7 @@ PrefabInstance:
     - target: {fileID: 5630148222580376669, guid: e7e266453d17f496b9952e6de03c6b9c, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 113848953}
+      objectReference: {fileID: 568335302}
     - target: {fileID: 5630148222580376669, guid: e7e266453d17f496b9952e6de03c6b9c, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -402,7 +400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5630148222580376669, guid: e7e266453d17f496b9952e6de03c6b9c, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Population, Assembly-CSharp
+      value: GeneticUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5630148222580376669, guid: e7e266453d17f496b9952e6de03c6b9c, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -588,6 +586,7 @@ GameObject:
   - component: {fileID: 568335298}
   - component: {fileID: 568335301}
   - component: {fileID: 568335300}
+  - component: {fileID: 568335302}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -656,6 +655,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 568335297}
   m_CullTransparentMesh: 1
+--- !u!114 &568335302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568335297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a632a8fbd1eb46e5b35887cfa975403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tmpIndividuals: {fileID: 1677139786}
+  _tmpGenerations: {fileID: 1817860567}
 --- !u!1 &575125175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,7 +1209,7 @@ PrefabInstance:
     - target: {fileID: 5630148222580376669, guid: e7e266453d17f496b9952e6de03c6b9c, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 113848953}
+      objectReference: {fileID: 568335302}
     - target: {fileID: 5630148222580376669, guid: e7e266453d17f496b9952e6de03c6b9c, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1207,7 +1220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5630148222580376669, guid: e7e266453d17f496b9952e6de03c6b9c, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Population, Assembly-CSharp
+      value: GeneticUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5630148222580376669, guid: e7e266453d17f496b9952e6de03c6b9c, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1338,7 +1351,7 @@ PrefabInstance:
     - target: {fileID: 7724292287017282821, guid: e411081c799704b3d8648d20945560ae, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 113848953}
+      objectReference: {fileID: 568335302}
     - target: {fileID: 7724292287017282821, guid: e411081c799704b3d8648d20945560ae, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1349,7 +1362,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7724292287017282821, guid: e411081c799704b3d8648d20945560ae, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Population, Assembly-CSharp
+      value: GeneticUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7724292287017282821, guid: e411081c799704b3d8648d20945560ae, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument

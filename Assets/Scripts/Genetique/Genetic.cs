@@ -6,65 +6,42 @@ using Photon.Pun;
 
 public abstract class Genetic : MonoBehaviour
 {
+    public static Genetic Instance;
+
     private List<Vector4> _population = new();
 
-    private int nbIndividuals = 4;
-    private int nbGenerations = 2;
+    private int _nbIndividuals;
+    private static int _nbGenerations;
 
     private int indexIndividuals;
     private int indexGenerations;
 
-    [SerializeField] private TMP_InputField TmpIndividuals;
-    [SerializeField] private TMP_InputField TmpGenerations;
-
     private void Awake()
     {
-        GameManager.OnGameStateChanged += OnGameStateChanged;
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        GameManager.OnGameStateChanged += OnGameStateChanged;
     }
 
-    public void OnIndividualTextChange(string text)
-    {
-        if (int.TryParse(text, out int result))
-        {
-            int finalResult = Mathf.Max(4, result) - Mathf.Max(4, result) % 4;
-            nbIndividuals = finalResult;
-            TmpIndividuals.text = finalResult.ToString();
-        }
-        else
-        {
-            nbIndividuals = 4;
-            TmpIndividuals.text = 4.ToString();
-        }
-    }
 
-    public void OnGenerationTextChange(string text)
-    {
-        if (int.TryParse(text, out int result))
-        {
-            int finalResult = Mathf.Max(1, result);
-            nbGenerations = finalResult;
-            TmpGenerations.text = finalResult.ToString();
-        }
-        else
-        {
-            nbGenerations = 2;
-            TmpGenerations.text = 2.ToString();
-        }
-    }
+    // ------------------------------------------ Handle Matchs ------------------------------------------
 
-    private void OnGameStateChanged(GameState newState)
-    {
-        if (newState == GameState.Win && SceneSetUpManager.playMode == "Algo Genetique") OnEndGame(true);
-        if (newState == GameState.Loose && SceneSetUpManager.playMode == "Algo Genetique") OnEndGame(false);
-    }
 
-    public void Play()
+    public void StartGeneticAlgorithm(int nbIndividuals, int nbGenerations)
     {
+        _nbIndividuals = nbIndividuals;
+        _nbGenerations = nbGenerations;
         indexIndividuals = 0;
         indexGenerations = 0;
 
-        for (int i = 0; i < nbIndividuals; i++)
+        for (int i = 0; i < _nbIndividuals; i++)
         {
             Vector4 weight = new Vector4(Random.value, Random.value, Random.value, Random.value);
             _population.Add(weight);
@@ -94,7 +71,17 @@ public abstract class Genetic : MonoBehaviour
         else PrivateRoom.Instance.CreatePrivateRoom();
     }
 
-    private void OnEndGame(bool stateIsWin)
+
+    // ------------------------------------------ On End Match ------------------------------------------
+
+
+    private void OnGameStateChanged(GameState newState)
+    {
+        if (newState == GameState.Win && SceneSetUpManager.playMode == "Algo Genetique") OnEndMatch(true);
+        if (newState == GameState.Loose && SceneSetUpManager.playMode == "Algo Genetique") OnEndMatch(false);
+    }
+
+    private void OnEndMatch(bool stateIsWin)
     {
         indexIndividuals += 2;
 
@@ -115,12 +102,12 @@ public abstract class Genetic : MonoBehaviour
         _winners.Add(IAWinner.weight);
         _loosers.Add(IALooser.weight);
 
-        if (indexIndividuals == nbIndividuals)
+        if (indexIndividuals == _nbIndividuals)
         {
             indexGenerations++;
             indexIndividuals = 0;
 
-            if (indexGenerations == nbGenerations)
+            if (indexGenerations == _nbGenerations)
             {
                 string results = "";
                 foreach (Vector4 weight in _winners) results += weight + "\n";
@@ -135,6 +122,10 @@ public abstract class Genetic : MonoBehaviour
 
         Match();
     }
+
+
+    // ------------------------------------------ Protected Properties ------------------------------------------
+
 
     /// <summary>
     /// Populate the next generation before creating matchs.
