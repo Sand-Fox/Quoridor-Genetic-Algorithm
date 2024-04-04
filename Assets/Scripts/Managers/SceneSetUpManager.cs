@@ -8,11 +8,8 @@ public class SceneSetUpManager : MonoBehaviour
     public static SceneSetUpManager Instance;
     public static string playMode;
 
-    public static string IAName1;
-    public static string IAName2;
-
-    public static Vector4 IAWeight1;
-    public static Vector4 IAWeight2;
+    public static Vector4 IAWeightBot;
+    public static Vector4 IAWeightTop;
 
     public static Partie replay;
 
@@ -40,48 +37,53 @@ public class SceneSetUpManager : MonoBehaviour
 
         if (playMode == "Player vs IA")
         {
-            GameObject IAObject = PhotonNetwork.Instantiate(IAName1, new Vector2(4, 4), Quaternion.identity);
-            BaseIA IA = IAObject.GetComponent<BaseIA>();
+            GameObject IAObject = PhotonNetwork.Instantiate("Units/IANegaAlphaBeta", new Vector2(4, 4), Quaternion.identity);
+            IANegaAlphaBeta IA = IAObject.GetComponent<IANegaAlphaBeta>();
             ReferenceManager.Instance.enemy = IA;
+            IA.weight = IAWeightTop;
         }
 
         if (playMode == "IA vs IA")
         {
-            GameObject IAObject1 = PhotonNetwork.Instantiate(IAName1, new Vector2(4, 4), Quaternion.identity);
-            IAObject1.GetComponent<SpriteRenderer>().color = ColorExtension.blue;
-            ReferenceManager.Instance.player = IAObject1.GetComponent<BaseIA>();
+            GameObject IAObjectBot = PhotonNetwork.Instantiate("Units/IANegaAlphaBeta", new Vector2(4, 4), Quaternion.identity);
+            IAObjectBot.GetComponent<SpriteRenderer>().color = ColorExtension.blue;
+            IANegaAlphaBeta IABot = IAObjectBot.GetComponent<IANegaAlphaBeta>();
+            ReferenceManager.Instance.player = IABot;
+            IABot.weight = IAWeightBot;
 
-            GameObject IAObject2 = PhotonNetwork.Instantiate(IAName2, new Vector2(4, 4), Quaternion.identity);
-            ReferenceManager.Instance.enemy = IAObject2.GetComponent<BaseIA>();
+            GameObject IAObjectTop = PhotonNetwork.Instantiate("Units/IANegaAlphaBeta", new Vector2(4, 4), Quaternion.identity);
+            IANegaAlphaBeta IATop = IAObjectTop.GetComponent<IANegaAlphaBeta>();
+            ReferenceManager.Instance.enemy = IATop;
+            IATop.weight = IAWeightTop;
         }
 
         if (playMode == "Algo Genetique")
         {
-            GameObject IAObject1 = PhotonNetwork.Instantiate("Units/IANegaAlphaBeta", new Vector2(4, 4), Quaternion.identity);
-            IAObject1.GetComponent<SpriteRenderer>().color = ColorExtension.blue;
-            IANegaAlphaBeta IA1 = IAObject1.GetComponent<IANegaAlphaBeta>();
-            ReferenceManager.Instance.player = IA1;
-            IA1.weight = IAWeight1;
+            GameObject IAObjectBot = PhotonNetwork.Instantiate("Units/IANegaAlphaBeta", new Vector2(4, 4), Quaternion.identity);
+            IAObjectBot.GetComponent<SpriteRenderer>().color = ColorExtension.blue;
+            IANegaAlphaBeta IABot = IAObjectBot.GetComponent<IANegaAlphaBeta>();
+            ReferenceManager.Instance.player = IABot;
+            IABot.weight = IAWeightBot;
 
-            GameObject IAObject2 = PhotonNetwork.Instantiate("Units/IANegaAlphaBeta", new Vector2(4, 4), Quaternion.identity);
-            IANegaAlphaBeta IA2 = IAObject2.GetComponent<IANegaAlphaBeta>();
-            ReferenceManager.Instance.enemy = IA2;
-            IA2.weight = IAWeight2;
+            GameObject IAObjectTop = PhotonNetwork.Instantiate("Units/IANegaAlphaBeta", new Vector2(4, 4), Quaternion.identity);
+            IANegaAlphaBeta IATop = IAObjectTop.GetComponent<IANegaAlphaBeta>();
+            ReferenceManager.Instance.enemy = IATop;
+            IATop.weight = IAWeightTop;
         }
 
         if (playMode == "Replays")
         {
-            GameObject IAObject1 = PhotonNetwork.Instantiate("Units/IAReplay", new Vector2(4, 4), Quaternion.identity);
-            IAObject1.GetComponent<SpriteRenderer>().color = ColorExtension.blue;
-            IAReplay IAReplay1 = IAObject1.GetComponent<IAReplay>();
-            ReferenceManager.Instance.player = IAReplay1;
-            IAReplay1.index = (replay.playerBegins) ? 0 : 1;
+            GameObject IAObjectBot = PhotonNetwork.Instantiate("Units/IAReplay", new Vector2(4, 4), Quaternion.identity);
+            IAObjectBot.GetComponent<SpriteRenderer>().color = ColorExtension.blue;
+            IAReplay IAReplayBot = IAObjectBot.GetComponent<IAReplay>();
+            ReferenceManager.Instance.player = IAReplayBot;
+            IAReplayBot.index = (replay.playerBegins) ? 0 : 1;
 
 
-            GameObject IAObject2 = PhotonNetwork.Instantiate("Units/IAReplay", new Vector2(4, 4), Quaternion.identity);
-            IAReplay IAReplay2 = IAObject2.GetComponent<IAReplay>();
-            ReferenceManager.Instance.enemy = IAReplay2;
-            IAReplay2.index = (replay.playerBegins) ? 1 : 0;
+            GameObject IAObjectTop = PhotonNetwork.Instantiate("Units/IAReplay", new Vector2(4, 4), Quaternion.identity);
+            IAReplay IAReplayTop = IAObjectTop.GetComponent<IAReplay>();
+            ReferenceManager.Instance.enemy = IAReplayTop;
+            IAReplayTop.index = (replay.playerBegins) ? 1 : 0;
         }
 
     }

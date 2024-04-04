@@ -15,7 +15,7 @@ public class SliderIADescription : MonoBehaviour
 
     public void OnSlider1Changed(float value)
     {
-        if (AudioManager.Instance != null)
+        /*
         AudioManager.Instance.Play("Click");
 
         if (value == 1) 
@@ -44,10 +44,12 @@ public class SliderIADescription : MonoBehaviour
             SceneSetUpManager.IAName1 = "Units/IANegaAlphaBeta";
         }
         else TmpText.text = "" + value;
+        */
     }
 
     public void OnSlider2Changed(float value)
     {
+        /*
         if (value == 1)
         {
             TmpText.text = IAMove.description;
@@ -74,5 +76,6 @@ public class SliderIADescription : MonoBehaviour
             SceneSetUpManager.IAName2 = "Units/IANegaAlphaBeta";
         }
         else TmpText.text = "" + value;
+        */
     }
 }

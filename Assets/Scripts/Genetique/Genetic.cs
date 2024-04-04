@@ -66,8 +66,8 @@ public abstract class Genetic : MonoBehaviour
         _population.Remove(weight1);
         _population.Remove(weight2);
 
-        SceneSetUpManager.IAWeight1 = weight1;
-        SceneSetUpManager.IAWeight2 = weight2;
+        SceneSetUpManager.IAWeightBot = weight1;
+        SceneSetUpManager.IAWeightTop = weight2;
 
         StartCoroutine(ReloadGame());
     }
