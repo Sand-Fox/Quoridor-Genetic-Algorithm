@@ -10,7 +10,7 @@ public abstract class Genetic : MonoBehaviour
 
     private List<Vector4> _population = new();
 
-    private int _nbIndividuals;
+    protected int _nbIndividuals;
     private int _nbGenerations;
 
     private int _indexIndividuals;
