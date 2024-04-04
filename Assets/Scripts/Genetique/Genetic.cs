@@ -156,6 +156,8 @@ public abstract class Genetic : MonoBehaviour
                 }
 
                 _population = CreateNewGeneration();
+                _winners.Clear();
+                _loosers.Clear();
 
                 if (_population.Count != _nbIndividuals)
                 {

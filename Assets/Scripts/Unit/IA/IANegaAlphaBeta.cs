@@ -6,7 +6,7 @@ using Debug = UnityEngine.Debug;
 public class IANegaAlphaBeta : BaseIA
 {
     public static string description = "AI that chooses the best move using\nNega Alpha Beta algorithm";
-    public Vector4 weight = new Vector4(1, 1, 1, 1);
+    public Vector4 weight;
     public int defaultDepth = 2;
 
     protected override void PlayIA()

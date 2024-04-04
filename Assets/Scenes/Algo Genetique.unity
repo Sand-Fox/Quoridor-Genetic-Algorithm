@@ -1647,7 +1647,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Genetic algorithm on nega alpha beta
+  m_text: 'Genetic algorithm on alpha beta
 
     with x individuals and y generations.'
   m_isRightToLeft: 0
