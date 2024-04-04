@@ -16,6 +16,8 @@ public abstract class Genetic : MonoBehaviour
     private int _indexIndividuals;
     private int _indexGenerations;
 
+    private bool _enTournoi;
+
     private void Awake()
     {
         if (Instance != null)
@@ -55,6 +57,13 @@ public abstract class Genetic : MonoBehaviour
             _population.Add(weight);
         }
 
+        Match();
+    }
+
+    private void NextTournamentPool()
+    {
+        _population = _winners;
+        _winners = new List<Vector4>();
         Match();
     }
 
@@ -110,31 +119,55 @@ public abstract class Genetic : MonoBehaviour
         _winners.Add(IAWinner.weight);
         _loosers.Add(IALooser.weight);
 
-        if (_indexIndividuals == _nbIndividuals)
+        if (_enTournoi)
         {
-            _indexGenerations++;
-            _indexIndividuals = 0;
-
-            if (_indexGenerations == _nbGenerations)
+            if (_population.Count == 0)
             {
-                string results = "";
-                foreach (Vector4 weight in _winners) results += weight + "\n";
-                UIManager.Instance.EnableGeneticResults(results);
+                if (_winners.Count == 1)
+                {
+                    string results = "";
+                    foreach (Vector4 weight in _winners) results += weight + "\n";
+                    UIManager.Instance.EnableGeneticResults(results);
+                    return;
+                }
+                else
+                {
+                    NextTournamentPool();
+                }
+            }
+            else
+            {
+                Match();
+            }
+        }
+
+        else
+        {
+            if (_indexIndividuals == _nbIndividuals)
+            {
+                _indexGenerations++;
+                _indexIndividuals = 0;
+
+                if (_indexGenerations == _nbGenerations)
+                {
+                    _enTournoi = true;
+                    Match();
+                    return;
+                }
+
+                _population = CreateNewGeneration();
+
+                if (_population.Count != _nbIndividuals)
+                {
+                    Debug.LogError("Attention : Toutes les generations doivent avoir le meme nombre d'individus.");
+                }
+
+                Match();
                 return;
             }
 
-            _population = CreateNewGeneration();
-
-            if (_population.Count != _nbIndividuals)
-            {
-                Debug.LogError("Attention : Toutes les generations doivent avoir le meme nombre d'individus.");
-            }
-
             Match();
-            return;
         }
-
-        Match();
     }
 
 
