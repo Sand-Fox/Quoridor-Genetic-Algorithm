@@ -29,6 +29,8 @@ public class SceneSetUpManager : MonoBehaviour
 
     private void OnSpawnUnits()
     {
+        BaseUnit.movementDuration = 0.3f;
+
         if (playMode == "Multiplayer" || playMode == "Player vs IA")
         {
             GameObject playerObject = PhotonNetwork.Instantiate("Units/Player", new Vector2(4, 4), Quaternion.identity);
@@ -69,6 +71,8 @@ public class SceneSetUpManager : MonoBehaviour
             IANegaAlphaBeta IATop = IAObjectTop.GetComponent<IANegaAlphaBeta>();
             ReferenceManager.Instance.enemy = IATop;
             IATop.weight = IAWeightTop;
+
+            BaseUnit.movementDuration = 0.001f;
         }
 
         if (playMode == "Replays")
