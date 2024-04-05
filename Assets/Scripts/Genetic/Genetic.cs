@@ -2,21 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GeneticWithMutation : Genetic
+public class Genetic : GeneticBase
 {
-    [SerializeField, Range(0, 1)] private float _mutateProbability = 0.1f;
-
     protected override List<Vector4> CreateNewGeneration()
     {
         List<Vector4> newGen = new();
 
-        while (_winners.Count > 0)
+        while (newGen.Count != _nbIndividuals)
         {
-            Vector4 father = _winners.GetRandom();
-            Vector4 mother = _winners.GetRandom();
+            Vector4 father;
+            Vector4 mother;
 
-            _winners.Remove(father);
-            _winners.Remove(mother);
+            if (Random.value < _winnerSelectProbability)
+            {
+                father = _winners.GetRandom();
+                _winners.Remove(father);
+            }
+            else
+            {
+                father = _loosers.GetRandom();
+                _loosers.Remove(father);
+            }
+
+            if (Random.value < _winnerSelectProbability)
+            {
+                mother = _winners.GetRandom();
+                _winners.Remove(mother);
+            }
+            else
+            {
+                mother = _loosers.GetRandom();
+                _loosers.Remove(mother);
+            }
 
             Vector4 child1 = Reproduce(father, mother);
             Vector4 child2 = Reproduce(father, mother);
