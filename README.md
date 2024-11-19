@@ -1,4 +1,4 @@
-# ProjetQuoridor
+# AI in Quoridor
 
 ## Table of contents
 
@@ -19,7 +19,8 @@ It provides online multiplayer, advanced AI and a genetic algorithm to determine
 This project was originally implemented by [Nino Sandlarz](https://github.com/Sand-Fox) and [Henri Besancenot](https://github.com/BlackH57) as part of the double degree in maths and computer science at Sorbonne University. The project was then taken over and pushed forward by [Nino Sandlarz](https://github.com/Sand-Fox) and [Marina Secord](https://github.com/Lyrdinn) during the 1st year of the master's degree in video games at Cnam-Enjmin.
 	
 ## Setup
-To run this project, choose and run one of the builds above (the mac version may not work).
+To run this project, choose and run one of the builds above or try the web version (the online server might not work).
+https://ninosandlarz.itch.io/quor-university-project
 
 ## Features
 * Play a game of Quoridor with a friend on server.
